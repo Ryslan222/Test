@@ -18,14 +18,22 @@ namespace Test.Controllers
             return View();
 
         }
+        [HttpGet]
+        public ActionResult Send ()
+        {
+            return View();
+        }
+
+
         [HttpPost]
-        public string Send(Item Item)
+        public ActionResult Send(Item Item)
         {
            
             // добавляем информацию о покупке в базу данных
             db.Items.Add(Item);
             // сохраняем в бд все изменения
             db.SaveChanges();
+            return View();
            
         }
 
