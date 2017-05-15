@@ -29,9 +29,8 @@ namespace Test.Controllers
         public ActionResult Send(Item Item)
         {
            
-            // добавляем информацию о покупке в базу данных
-            db.Items.Add(Item);
-            // сохраняем в бд все изменения
+            
+            db.Items.Add(Item);            
             db.SaveChanges();
             return View();
            
