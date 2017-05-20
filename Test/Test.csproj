@@ -153,6 +153,7 @@
     </Compile>
     <Compile Include="Models\Item.cs" />
     <Compile Include="Models\ItemContext.cs" />
+    <Compile Include="Models\SubTask.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
@@ -199,6 +200,8 @@
     <Content Include="Views\Home\Send.cshtml" />
     <Content Include="Views\Home\EditTask.cshtml" />
     <Content Include="Views\Home\Delete.cshtml" />
+    <Content Include="Views\Home\Activ.cshtml" />
+    <Content Include="Views\Home\Sub.cshtml" />
   </ItemGroup>
   <ItemGroup />
   <ItemGroup>

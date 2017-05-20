@@ -1,0 +1,47 @@
+﻿@{
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<!DOCTYPE html>
+
+<html>
+<head>
+    <meta name="viewport" content="width=device-width" />
+    <title>ToDo</title>
+</head>
+<body>
+    <div>
+        <h3>List Complate</h3>
+
+        <table>
+          
+            <tr>
+                <td><p>Name</p></td>
+                <td><p>IsComplate</p></td>
+                <td><p>Srart</p></td>
+                <td><p>Srart</p></td>
+
+                <td></td>
+            </tr>
+            @foreach (var b in ViewBag.Items)
+            {
+                <tr>
+                    <td><p>@b.name</p></td>
+                    <td><p>@b.IsComplate </p></td>
+                    <td><p>@b.FirstData </p></td>
+                    <td><p>@b.LastData </p></td>                                    
+
+                </tr>
+            }
+        </table>
+    </div>
+</body>
+</html>
+
+
+@{
+    ViewBag.Title = "Activ";
+}
+
+<h2>Activ</h2>
+

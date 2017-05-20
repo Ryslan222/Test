@@ -9,6 +9,7 @@ namespace Test.Models
     public class ItemContext : DbContext
     {
         public DbSet<Item> Items { get; set; }
+        public DbSet<SubTask> SubTasks { get; set; }
 
         protected override void OnModelCreating(DbModelBuilder modelBuilder)
         {

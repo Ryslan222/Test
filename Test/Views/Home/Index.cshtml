@@ -23,21 +23,25 @@
                     <td><p>Name</p></td>
                     <td><p>IsComplate</p></td>
                     <td><p>Srart</p></td>
-                    <td><p>Srart</p></td>
+                    <td><p>Finish</p></td>
+                    <td><p>Rating</p></td>
 
                     <td></td>
                 </tr>
                 @foreach (var b in ViewBag.Items)
             {
                     <tr>
-                        <td><p>@b.name</p></td>
+                        <td><p>@b.name</p></td>                       
                         <td><p>@b.IsComplate </p></td>
                         <td><p>@b.FirstData </p></td>
                         <td><p>@b.LastData </p></td>
+                        <td><p>@b.rating </p></td>
 
                         <td>
                         <td><p><a href="/Home/EditTask/@b.Id">Сhange</a></p></td>
                         <td><p><a href="/Home/Delete/@b.Id">Delete</a></p></td>
+                        <td><p><a href="/Home/Sub/@b.Id">SubTask</a></p></td>
+
     
                     </tr>
                 }

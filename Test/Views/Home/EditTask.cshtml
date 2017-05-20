@@ -16,6 +16,11 @@
             @Html.EditorFor(m => m.name)
         </p>
         <p>
+            @Html.LabelFor(m => m.rating, "Rating")
+            <br />
+            @Html.EditorFor(m => m.rating)             
+        </p>
+        <p>
             @Html.LabelFor(m => m.IsComplate, "IsComplate")
             <br />
             @Html.EditorFor(m => m.IsComplate)

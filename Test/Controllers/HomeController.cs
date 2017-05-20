@@ -10,17 +10,18 @@ namespace Test.Controllers
 {
     public class HomeController : Controller
     {
+
         ItemContext db = new ItemContext();
         public ActionResult Index()
         {
-            IEnumerable<Item> items = db.Items;
+            IEnumerable<Item> items = db.Items.OrderBy(i => i.IsComplate).ThenByDescending(i => i.rating);
             ViewBag.Items = items;
 
             return View();
 
         }
         [HttpGet]
-        public ActionResult Send ()
+        public ActionResult Send()
         {
             return View();
         }
@@ -31,10 +32,10 @@ namespace Test.Controllers
         {
 
             Item.FirstData = DateTime.Now;
-            db.Items.Add(Item);            
+            db.Items.Add(Item);
             db.SaveChanges();
             return RedirectToAction("Index");
-           
+
         }
         [HttpGet]
         public ActionResult EditTask(int? id)
@@ -53,12 +54,12 @@ namespace Test.Controllers
         [HttpPost]
         public ActionResult EditItem(Item item)
         {
-            if(item.IsComplate==true)
+            if (item.IsComplate == true)
             {
                 item.LastData = DateTime.Now;
             }
 
-         
+
             db.Entry(item).State = EntityState.Modified;
             db.SaveChanges();
             return RedirectToAction("Index");
@@ -85,6 +86,37 @@ namespace Test.Controllers
             db.SaveChanges();
             return RedirectToAction("Index");
         }
-    }
+        [HttpGet]
+        public ActionResult Activ()
+        {
+            IEnumerable<Item> items = db.Items.Where(i => i.IsComplate).ToList();
+            ViewBag.Items = items;
 
+            return View();
+        }
+
+        [HttpGet]
+        public ActionResult Sub(int? Id )
+        {
+            if (Id == null)
+            {
+                return HttpNotFound();
+            }
+            Item itemm = db.Items.Find(Id);
+            if (itemm != null)
+            {
+                return View(itemm);
+            }
+            return HttpNotFound();
+        }
+        [HttpPost]
+        public ActionResult Sub(SubTask SubTask)
+        {
+                   
+            db.SubTasks.Add(SubTask);
+           
+            db.SaveChanges();
+            return View();
+        }
+    }
 }
