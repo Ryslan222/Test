@@ -29,11 +29,11 @@ namespace Test.Controllers
         [HttpPost]
         public ActionResult Send(Item Item)
         {
-           
-            
+
+            Item.FirstData = DateTime.Now;
             db.Items.Add(Item);            
             db.SaveChanges();
-            return View();
+            return RedirectToAction("Index");
            
         }
         [HttpGet]
@@ -53,7 +53,35 @@ namespace Test.Controllers
         [HttpPost]
         public ActionResult EditItem(Item item)
         {
+            if(item.IsComplate==true)
+            {
+                item.LastData = DateTime.Now;
+            }
+
+         
             db.Entry(item).State = EntityState.Modified;
+            db.SaveChanges();
+            return RedirectToAction("Index");
+        }
+        [HttpGet]
+        public ActionResult Delete(int id)
+        {
+            Item b = db.Items.Find(id);
+            if (b == null)
+            {
+                return HttpNotFound();
+            }
+            return View(b);
+        }
+        [HttpPost, ActionName("Delete")]
+        public ActionResult DeleteConfirmed(int id)
+        {
+            Item b = db.Items.Find(id);
+            if (b == null)
+            {
+                return HttpNotFound();
+            }
+            db.Items.Remove(b);
             db.SaveChanges();
             return RedirectToAction("Index");
         }

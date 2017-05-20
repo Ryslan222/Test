@@ -7,6 +7,8 @@
 @using (Html.BeginForm("EditItem", "Home", FormMethod.Post))
 {
     <fieldset>
+        @Html.HiddenFor(m=> m.FirstData)
+        @Html.HiddenFor(m => m.LastData)
         @Html.HiddenFor(m => m.Id)
         <p>
             @Html.LabelFor(m => m.name, "Name")
@@ -19,6 +21,8 @@
             @Html.EditorFor(m => m.IsComplate)
 
         </p>
+
+      
         
         <p><input type="submit" value="Отправить" /></p>
     </fieldset>

@@ -1,5 +1,5 @@
 ﻿@{
-    Layout = null;
+    Layout = "~/Views/Shared/_Layout.cshtml";
 }
 
 <!DOCTYPE html>
@@ -10,12 +10,10 @@
 </head>
 <body>
     <div>        
-        <form method="post" action="">                  
+        <form method="post" action="">             
+            <input type="hidden" value="@DateTime.Now" name="FirstData" />
             <table>
-                <tr>
-
-                    <td><p><a href="/Home/Index">List</a></p></td>
-                </tr>
+                
                 <tr>
                     <td><p> </p></td>
                     <td><input type="text" name="name" /> </td>

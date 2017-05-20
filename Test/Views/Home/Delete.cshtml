@@ -1,0 +1,23 @@
+﻿@{
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+@model Test.Models.Item
+<h2>Delete</h2>
+<dl>
+    <dt>Name</dt>
+    <dd>
+        @Html.DisplayFor(model => model.name)
+    </dd>
+
+    <dt>IsComplate</dt>
+    <dd>
+        @Html.DisplayFor(model => model.IsComplate)
+    </dd>
+
+    
+</dl>
+
+@using (Html.BeginForm())
+{
+    <input type="submit" value="Удалить" />
+}

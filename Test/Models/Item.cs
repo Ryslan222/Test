@@ -10,6 +10,8 @@ namespace Test.Models
         public int Id { get; set; }
         public string name { get; set; }
         public bool IsComplate { get; set; }
+        public DateTime FirstData { get; set; }
+        public DateTime LastData { get; set; }
      
 
     }
