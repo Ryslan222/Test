@@ -154,6 +154,7 @@
     <Compile Include="Models\Item.cs" />
     <Compile Include="Models\ItemContext.cs" />
     <Compile Include="Models\SubTask.cs" />
+    <Compile Include="Models\Tag.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
@@ -204,6 +205,9 @@
     <Content Include="Views\Home\Sub1.cshtml" />
     <Content Include="Views\Home\Sub.cshtml" />
     <Content Include="Views\Home\DeletSub.cshtml" />
+    <Content Include="Views\Home\SendTag.cshtml" />
+    <Content Include="Views\Home\Details.cshtml" />
+    <Content Include="Views\Home\Edit.cshtml" />
   </ItemGroup>
   <ItemGroup />
   <ItemGroup>

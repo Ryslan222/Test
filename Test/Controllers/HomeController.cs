@@ -105,14 +105,14 @@ namespace Test.Controllers
         [HttpPost]
         public ActionResult Sub(SubTask SubTask)
         {
-                   
+
             db.SubTasks.Add(SubTask);
-           
+
             db.SaveChanges();
             return RedirectToAction("Index");
         }
         [HttpGet]
-        public ActionResult Sub1 (int? id)
+        public ActionResult Sub1(int? id)
         {
             if (id == null)
             {
@@ -123,6 +123,9 @@ namespace Test.Controllers
             {
                 return HttpNotFound();
             }
+            IEnumerable<SubTask> SubTasks = db.SubTasks.OrderBy(i => i.order);
+            ViewBag.SubTasks = SubTasks;
+
             return View(item);
         }
         public ActionResult DeletSub(int id)
@@ -146,5 +149,68 @@ namespace Test.Controllers
             db.SaveChanges();
             return RedirectToAction("Index");
         }
+        [HttpGet]
+        public ActionResult SendTag()
+        {
+            return View();
+        }
+
+
+        [HttpPost]
+        public ActionResult SendTag(Tag Tag)
+        {
+            db.Tag.Add(Tag);
+            db.SaveChanges();
+            return RedirectToAction("Index");
+
+        }
+        public ActionResult Details(int? id )
+        {
+            Item Item = db.Items.Find(id);
+            if (Item == null)
+            {
+                return HttpNotFound();
+            }
+            return View(Item);
+        }
+
+        protected override void Dispose(bool disposing)
+        {
+            db.Dispose();
+            base.Dispose(disposing);
+        }
+        public ActionResult Edit(int? id)
+        {
+            Item item = db.Items.Find(id);
+            if (item == null)
+            {
+                return HttpNotFound();
+            }
+            ViewBag.Tag = db.Tag.ToList();
+            return View(item);
+        }
+
+        [HttpPost]
+        public ActionResult Edit(Item Item, int[] selectedTag)
+        {
+            Item newItem = db.Items.Find(Item.Id);
+            newItem.name = Item.name;
+            newItem.rating = Item.rating;
+
+            newItem.Tag.Clear();
+            if (selectedTag != null)
+            {
+              
+                foreach (var c in db.Tag.Where(co => selectedTag.Contains(co.Id)))
+                {
+                    newItem.Tag.Add(c);
+                }
+            }
+
+            db.Entry(newItem).State = EntityState.Modified;
+            db.SaveChanges();
+            return RedirectToAction("Index");
+        }
+
     }
 }

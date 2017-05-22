@@ -24,16 +24,27 @@
         <dt>SabTasks</dt>
 
         <dd>
-            <ul>
-                @foreach (SubTask subtask in Model.Subtasks)
-                {
-                    <li>@subtask.name (@subtask.order)</li>
-                    <td><p><a href="/Home/DeletSub/@subtask.Id">Delete</a></p></td>
+            <table>
+                <tr>
+                    <td><p>Name</p></td>                   
+                    <td><p>Order</p></td>
 
+                    <td></td>
+                </tr>
+                @foreach (var b in ViewBag.SubTasks)
+            {
+                    <tr>
+                        <td><p>@b.name</p></td>
+                        <td><p>@b.order </p></td>
 
+                        <td>
+                        <td><p><a href="/Home/DeletSub/@b.Id">Delete</a></p></td>
+
+                    </tr>
                 }
+         
 
-            </ul>
+            </table>
         </dd>
     </dl>
 </div>

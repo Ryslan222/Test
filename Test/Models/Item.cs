@@ -14,7 +14,8 @@ namespace Test.Models
         public DateTime LastData { get; set; }
         public int rating { get; set; }
         public virtual ICollection<SubTask> Subtasks { get; set; } = new HashSet<SubTask>();
-
+        public virtual ICollection<Tag> Tag { get; set; } = new HashSet<Tag>();
+       
 
 
     }

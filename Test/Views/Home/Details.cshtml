@@ -1,0 +1,28 @@
+﻿@using Test.Models
+@model Item
+@{
+    ViewBag.Title = "Details";
+}
+
+<fieldset>
+    <legend></legend>
+
+    <div class="display-label"><b>Name</b></div>
+    <div class="display-field">
+        @Html.DisplayFor(model => model.name)
+    </div>
+
+    <div class="display-label"><b>Rating</b></div>
+    <div class="display-field">
+        @Html.DisplayFor(model => model.rating)
+    </div>
+
+    <div class="display-label"><b>Tag</b></div>
+    <ul>
+        @foreach (Tag c in Model.Tag)
+        {
+            <li>@c.name</li>
+        }
+    </ul>
+
+</fieldset>
