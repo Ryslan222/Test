@@ -1,0 +1,24 @@
+﻿@{
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+@model Test.Models.SubTask
+<h2>DeleteSub</h2>
+<dl>
+    <dt>Name</dt>
+    <dd>
+        @Html.DisplayFor(model => model.name)
+    </dd>
+
+    <dt>Order</dt>
+    <dd>
+        @Html.DisplayFor(model=>model.order)
+    </dd>
+
+
+</dl>
+
+@using (Html.BeginForm())
+{
+    <input type="submit" value="Удалить" />
+
+}

@@ -12,6 +12,7 @@ namespace Test.Controllers
     {
 
         ItemContext db = new ItemContext();
+
         public ActionResult Index()
         {
             IEnumerable<Item> items = db.Items.OrderBy(i => i.IsComplate).ThenByDescending(i => i.rating);
@@ -96,18 +97,10 @@ namespace Test.Controllers
         }
 
         [HttpGet]
-        public ActionResult Sub(int? Id )
+        public ActionResult Sub(int? Id)
         {
-            if (Id == null)
-            {
-                return HttpNotFound();
-            }
-            Item itemm = db.Items.Find(Id);
-            if (itemm != null)
-            {
-                return View(itemm);
-            }
-            return HttpNotFound();
+            ViewBag.ItemId = Id;
+            return View();
         }
         [HttpPost]
         public ActionResult Sub(SubTask SubTask)
@@ -116,7 +109,42 @@ namespace Test.Controllers
             db.SubTasks.Add(SubTask);
            
             db.SaveChanges();
-            return View();
+            return RedirectToAction("Index");
+        }
+        [HttpGet]
+        public ActionResult Sub1 (int? id)
+        {
+            if (id == null)
+            {
+                return HttpNotFound();
+            }
+            Item item = db.Items.Include(t => t.Subtasks).FirstOrDefault(t => t.Id == id);
+            if (item == null)
+            {
+                return HttpNotFound();
+            }
+            return View(item);
+        }
+        public ActionResult DeletSub(int id)
+        {
+            SubTask b = db.SubTasks.Find(id);
+            if (b == null)
+            {
+                return HttpNotFound();
+            }
+            return View(b);
+        }
+        [HttpPost, ActionName("DeletSub")]
+        public ActionResult DeletSubConfirmed(int id)
+        {
+            SubTask b = db.SubTasks.Find(id);
+            if (b == null)
+            {
+                return HttpNotFound();
+            }
+            db.SubTasks.Remove(b);
+            db.SaveChanges();
+            return RedirectToAction("Index");
         }
     }
 }

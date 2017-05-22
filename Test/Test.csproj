@@ -201,7 +201,9 @@
     <Content Include="Views\Home\EditTask.cshtml" />
     <Content Include="Views\Home\Delete.cshtml" />
     <Content Include="Views\Home\Activ.cshtml" />
+    <Content Include="Views\Home\Sub1.cshtml" />
     <Content Include="Views\Home\Sub.cshtml" />
+    <Content Include="Views\Home\DeletSub.cshtml" />
   </ItemGroup>
   <ItemGroup />
   <ItemGroup>

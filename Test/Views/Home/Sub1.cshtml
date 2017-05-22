@@ -1,0 +1,39 @@
+﻿@using Test.Models
+@model Item
+
+@{
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<div>
+    <h4>Task @ViewBag.ItemId</h4>
+    <hr />
+    <dl>
+        <dt>Name</dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.name)
+        </dd>
+
+        <dt>Rating</dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.rating)
+        </dd>
+
+        <dt>SabTasks</dt>
+
+        <dd>
+            <ul>
+                @foreach (SubTask subtask in Model.Subtasks)
+                {
+                    <li>@subtask.name (@subtask.order)</li>
+                    <td><p><a href="/Home/DeletSub/@subtask.Id">Delete</a></p></td>
+
+
+                }
+
+            </ul>
+        </dd>
+    </dl>
+</div>
