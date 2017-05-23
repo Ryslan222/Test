@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Data.Entity;
+using System.IO;
 using System.Linq;
 using System.Web;
 using System.Web.Mvc;
@@ -103,13 +104,16 @@ namespace Test.Controllers
             return View();
         }
         [HttpPost]
-        public ActionResult Sub(SubTask SubTask)
+        public ActionResult Sub(SubTask SubTask, int? Id)
         {
+            ViewBag.ItemId = Id;
 
             db.SubTasks.Add(SubTask);
 
+
+
             db.SaveChanges();
-            return RedirectToAction("Index");
+            return Redirect(Request.UrlReferrer.ToString());
         }
         [HttpGet]
         public ActionResult Sub1(int? id)
@@ -125,6 +129,9 @@ namespace Test.Controllers
             }
             IEnumerable<SubTask> SubTasks = db.SubTasks.OrderBy(i => i.order);
             ViewBag.SubTasks = SubTasks;
+
+
+            FileInfo fileInf = new FileInfo();
 
             return View(item);
         }
@@ -164,7 +171,7 @@ namespace Test.Controllers
             return RedirectToAction("Index");
 
         }
-        public ActionResult Details(int? id )
+        public ActionResult Details(int? id)
         {
             Item Item = db.Items.Find(id);
             if (Item == null)
@@ -200,7 +207,7 @@ namespace Test.Controllers
             newItem.Tag.Clear();
             if (selectedTag != null)
             {
-              
+
                 foreach (var c in db.Tag.Where(co => selectedTag.Contains(co.Id)))
                 {
                     newItem.Tag.Add(c);
@@ -211,6 +218,27 @@ namespace Test.Controllers
             db.SaveChanges();
             return RedirectToAction("Index");
         }
+        [HttpPost]
+        public ActionResult Upload(HttpPostedFileBase upload, int Id)
+        {
+            if (upload != null)
+            {
+                string fileName = System.IO.Path.GetFileName(upload.FileName);
 
+                upload.SaveAs(Server.MapPath("~/Files/" + fileName));
+
+
+            }
+            string fileName1 = System.IO.Path.GetFileName(upload.FileName);
+
+
+            FileInfo fileInf = new FileInfo("~/Files/" + fileName1);
+            string addres = System.IO.Path.GetFullPath(upload.FileName);
+
+            db.address.Add(new address { addres = addres, itemId = Id });
+            db.SaveChanges();
+
+            return Redirect(Request.UrlReferrer.ToString());
+        }
     }
 }

@@ -22,6 +22,7 @@ namespace Test.Models
                 .MapRightKey("ItemId")
                 .ToTable("TagItem"));
         }
+        public DbSet<address> address { get; set; }
 
         
     }

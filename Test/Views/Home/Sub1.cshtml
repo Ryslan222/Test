@@ -14,14 +14,48 @@
         <dd>
             @Html.DisplayFor(model => model.name)
         </dd>
-
+           
         <dt>Rating</dt>
 
         <dd>
             @Html.DisplayFor(model => model.rating)
-        </dd>
+        </dd>          
+        @{ 
+            var fi = (FileInfo)ViewBag.File;
+        }
+        @if (fi != null)
+        {
+            <div>@fi.FullName</div>
+        }
+        <h3>Выберите файл для загрузки</h3>
+        @using (Html.BeginForm("Upload", "Home", FormMethod.Post, new { enctype = "multipart/form-data" }))
+        {
 
+            <input type="hidden" value="@Model.Id" name="Id" />
+            <input type="file" name="upload" />
+
+            <input type="submit" value="Загрузить" />
+        }               
+     
         <dt>SabTasks</dt>
+       
+        @using (Html.BeginForm("Sub", "Home", FormMethod.Post))
+        {           
+            <input type="hidden" value="@Model.Id" name="ItemId" />
+            <table>
+                <tr>
+                    <td><p>Name </p></td>
+                    <td><input type="text" name="name" /> </td>
+                </tr>
+                <tr>
+                    <td><p>Order</p></td>
+                    <td>
+                    <td> <input type="number" step="1" min="1" max="5" value="1" name="order" /></td>
+                    
+                </tr>
+                <tr><td><input type="submit" value="Отправить" /> </td><td></td></tr>
+            </table>
+        }
 
         <dd>
             <table>

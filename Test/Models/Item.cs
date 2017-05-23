@@ -15,6 +15,7 @@ namespace Test.Models
         public int rating { get; set; }
         public virtual ICollection<SubTask> Subtasks { get; set; } = new HashSet<SubTask>();
         public virtual ICollection<Tag> Tag { get; set; } = new HashSet<Tag>();
+        public virtual ICollection<address> address {get; set;} = new HashSet<address>();
        
 
 
